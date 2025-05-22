@@ -25,7 +25,7 @@
                             <div class="text-center my-5">
                                 <h1 class="fw-bolder text-white mb-3">Our Story</h1>
                                 <p class="lead fw-normal text-white mb-4">Dunkin’ brings indulgence to everybody’s day with its signature donuts, coffee, baked goods, and more.</p>
-                                <a class="btn btn-outline-light btn-lg px-4 custom-hover" href="#scroll-target"  >EXLORE MENU</a>
+                                <a class="btn btn-outline-light btn-lg px-4 custom-hover" href="#scroll-target"  >EXPLORE</a>
                             </div>
                         </div>
                     </div>

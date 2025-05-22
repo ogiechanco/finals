@@ -26,19 +26,19 @@
             <section class="bg-light py-5">
     <div class="container px-5 my-5">
         <div class="text-center mb-5">
-            <h1 class="fw-bolder">Products</h1>
+            <h1 class="fw-bolder h5text">Products</h1>
         </div>
-        <div><h2 class="py-3">Beferages</h2>
+        <div><h2 class="py-3 ">Beferages</h2>
             <div class="row gx-5 justify-content-center">
                 
                 <?php
                 try {
-                    $sqlnprod = "SELECT productID, pname, descrip, qty, cname, picture, md5(productID) FROM vwproducts WHERE cname = 'Beverages'";
+                    $sqlnprod = "SELECT productID, pname, cname, picture, md5(productID) FROM vwproducts WHERE cname = 'Beverages'";
                     $stmtabout = $con->prepare($sqlnprod);
                     $stmtabout->execute();
 
                     while ($row = $stmtabout->fetch()) {
-                        $pic = strlen($row[5]) <= 2 ? 'nopic.jpg' : $row[5];
+                        $pic = strlen($row[3]) <= 2 ? 'nopic.jpg' : $row[3];
                         $imagePath = "uploads/products/" . htmlspecialchars($pic);
                         $productName = htmlspecialchars($row[1]);
 
@@ -65,12 +65,12 @@
                 
                 <?php
                 try {
-                    $sqlnprod = "SELECT productID, pname, descrip, qty, cname, picture, md5(productID) FROM vwproducts WHERE cname = 'Donuts'";
+                    $sqlnprod = "SELECT productID, pname, cname, picture, md5(productID) FROM vwproducts WHERE cname = 'Donuts'";
                     $stmtabout = $con->prepare($sqlnprod);
                     $stmtabout->execute();
 
                     while ($row = $stmtabout->fetch()) {
-                        $pic = strlen($row[5]) <= 2 ? 'nopic.jpg' : $row[5];
+                        $pic = strlen($row[3]) <= 2 ? 'nopic.jpg' : $row[3];
                         $imagePath = "uploads/products/" . htmlspecialchars($pic);
                         $productName = htmlspecialchars($row[1]);
 
@@ -97,12 +97,12 @@
                 
                 <?php
                 try {
-                    $sqlnprod = "SELECT productID, pname, descrip, qty, cname, picture, md5(productID) FROM vwproducts WHERE cname = 'Bundles'";
+                    $sqlnprod = "SELECT productID, pname, cname, picture, md5(productID) FROM vwproducts WHERE cname = 'Bundles'";
                     $stmtabout = $con->prepare($sqlnprod);
                     $stmtabout->execute();
 
                     while ($row = $stmtabout->fetch()) {
-                        $pic = strlen($row[5]) <= 2 ? 'nopic.jpg' : $row[5];
+                        $pic = strlen($row[3]) <= 2 ? 'nopic.jpg' : $row[3];
                         $imagePath = "uploads/products/" . htmlspecialchars($pic);
                         $productName = htmlspecialchars($row[1]);
 

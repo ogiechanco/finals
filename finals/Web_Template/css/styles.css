@@ -10874,10 +10874,15 @@ html {
   line-height: 1;
   padding: 15px 30px;
   text-transform: uppercase;
-  transform: scale(1);
-  transition: .3s ease .4s;
   width: 188px;
   height: 45px;
+}
+.btnprimary:hover{
+  border: none;
+  color: var(--bs-white);
+  background-color: var(--theme_sea_serpent);
+  transform: scale(0.9);
+  transition: 0.2s ease;
 }
 .h2-menu{
   color: var(--theme_ph_orange);
@@ -10930,4 +10935,20 @@ html {
 }
 body{
   background-color: #fcf6f6;
+}
+
+.h5text{
+  color: var(--theme_ph_orange);
+}
+
+.btnlightblue{
+  background-color: var(--theme_sea_serpent);
+  color: #fff;
+  font-weight: bolder;
+}
+.btnlightblue:hover{
+  background-color: var(--theme_sea_serpent);
+  color: #fff;
+  transform: scale(0.9);
+  transition: 0.3s ease;
 }

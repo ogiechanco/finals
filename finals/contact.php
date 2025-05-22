@@ -21,10 +21,10 @@
             <section class="py-5">
                 <div class="container px-5">
                     <!-- Contact form-->
-                    <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                    <div class=" rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <!--<div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>-->
-                            <h1 class="fw-bolder">Get in touch</h1>
+                            <h1 class="fw-bolder h5text">Get in touch</h1>
                             <p class="lead fw-normal text-muted mb-0">We'd love to hear from you</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
@@ -81,7 +81,7 @@
                                     <!-- an error submitting the form-->
                                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                                     <!-- Submit Button-->
-                                     <div class="d-grid"><button class="btn btn-info btn-lg">Submit</button></div>
+                                     <div class="d-grid"><button class="btn btn-lg btnlightblue">Submit</button></div>
                                     <!--<div class="d-grid"><button class="btn btn-warning btn-lg disabled" id="submitButton" type="submit">Submit</button></div>-->
                                 </form>
                             </div>
@@ -91,17 +91,17 @@
                     <div class="row gx-5 row-cols-2 row-cols-lg-4 py-5">
                         <div class="col">
                             <div class="feature bg-magenta bg-gradient text-white rounded-3 mb-3"><i class="bi bi-geo-alt" ></i></div>
-                            <div class="h5 mb-2">Address</div>
+                            <div class="h5 mb-2 h5text">Address</div>
                             <p class="text-muted mb-0">GDI Bldg. Reliance cor. Sheridan Sts. Highway Hills, Mandaluyong City</p>
                         </div>
                         <div class="col">
                             <div class="feature bg-magenta bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope "></i></div>
-                            <div class="h5">Email Us</div>
+                            <div class="h5 h5text">Email Us</div>
                             <p class="text-muted mb-0">dunkindonut@gmail.com</p>
                         </div>
-                        <div class="col">
+                        <div class="col ">
                             <div class="feature bg-magenta bg-gradient text-white rounded-3 mb-3"><i class="bi bi-info-circle"></i></div>
-                            <div class="h5">Social Media</div>
+                            <div class="h5 h5text">Social Media</div>
                             <div class="d-flex gap-3 ps-3">
                                 <a href="https://facebook.com" target="_blank" class="socmedhover fs-4"><i class="bi bi-facebook" ></i></a>
                                 <a href="https://twitter.com" target="_blank" class="socmedhover fs-4"><i class="bi bi-twitter" ></i></a>
@@ -110,7 +110,7 @@
                         </div>
                         <div class="col">
                             <div class="feature bg-magenta bg-gradient text-white rounded-3 mb-3"><i class="bi bi-telephone"></i></div>
-                            <div class="h5">Call us</div>
+                            <div class="h5 h5text">Call us</div>
                             <p class="text-muted mb-0">Call us during normal business hours at (+63) 9323198981.</p>
                         </div>
                     </div>

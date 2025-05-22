@@ -1,28 +1,5 @@
 <?php
     require_once("includes/dbconnect.php");
-    $id = 0;
-    $category ="";
-    if(isset($_GET['udid'])){
-        $id = $_GET['udid'];
-        try {
-            $sqlLoad = "SELECT categoryID, cname, md5(categoryID) FROM category WHERE md5(categoryID) = ?";
-            $dataLoad = array($id);
-            $stmtLoad = $con->prepare($sqlLoad);
-            $stmtLoad->execute($dataLoad);
-            if($stmtLoad->rowCount()!= 0){
-                $rowLoad = $stmtLoad->fetch();
-                $pname = $rowLoad[1];
-                $desc = $rowLoad[2];
-            }
-            
-        } catch (PDOException $th) {
-            echo $th->getMessage();
-        }
-    }
-    else {
-        $id = 0;
-        $category ="";
-    }
     
 ?>
 
@@ -48,10 +25,10 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Category</h1>
+                        <h1 class="mt-4">Messages</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Category</li>
+                            <li class="breadcrumb-item active">Messages</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
@@ -83,40 +60,36 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Category</th>
-                                                <th>Action</th>
+                                                <th>Full Name</th>
+                                                <th>Email</th>
+                                                <th>Contact No.</th>
+                                                <th>Message</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Category</th>
-                                                <th>Action</th>
+                                                <th>Full Name</th>
+                                                <th>Email</th>
+                                                <th>Contact No.</th>
+                                                <th>Message</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <?php
                                             
                                                 try {
-                                                    $sqlnprod="SELECT categoryID, cname, md5(categoryID) FROM category";
+                                                    $sqlnprod="SELECT messageID, fname,email,cpnum,msg FROM messages";
                                                     $stmtabout=$con->prepare($sqlnprod);
                                                     $stmtabout->execute();
                                                     $strtable="";
                                                     while($row= $stmtabout->fetch()){
                                                         $strtable.="<tr>";
                                                         $strtable.="<td>{$row[0]}</td>";
-                                                        $strtable.="<td>{$row[1]}</td>";                                                        
-                                                        $strDelButton="<button class='btn btn-danger'>
-                                                                        <a href='saveproduct.php?delid={$row[2]}'>
-                                                                        <i class='bx bxs-trash' style='color:#000'></i>
-                                                                        </a>
-                                                                        </button>";
-                                                        $strUpdateButton="<button class='btn btn-warning'>
-                                                                        <a href='products.php?udid={$row[2]}'>
-                                                                        <i class='bx bxs-edit-alt' style='color:#000'></i>
-                                                                        </a>
-                                                                        </button>";
-                                                        $strtable.="<td><div style ='white-space:nowrap'> {$strUpdateButton} {$strDelButton} </div></td>";
+                                                        $strtable.="<td>{$row[1]}</td>";
+                                                        $strtable.="<td>{$row[2]}</td>";  
+                                                        $strtable.="<td>{$row[3]}</td>";  
+                                                        $strtable.="<td>{$row[4]}</td>";                                                          
                                                         $strtable.="</tr>";
                                                     }
                                                     echo $strtable;

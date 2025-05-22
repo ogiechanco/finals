@@ -8,17 +8,15 @@
     if(isset($_GET['udid'])){
         $id = $_GET['udid'];
         try {
-            $sqlLoad = "SELECT productID, pname, descrip, qty, category, picture, md5(productID) FROM products WHERE md5(productID) = ?";
+            $sqlLoad = "SELECT productID, pname, category, picture, md5(productID) FROM products WHERE md5(productID) = ?";
             $dataLoad = array($id);
             $stmtLoad = $con->prepare($sqlLoad);
             $stmtLoad->execute($dataLoad);
             if($stmtLoad->rowCount()!= 0){
                 $rowLoad = $stmtLoad->fetch();
                 $pname = $rowLoad[1];
-                $desc = $rowLoad[2];
-                $qty = $rowLoad[3];
-                $category = $rowLoad[4];
-                $picture = $rowLoad[5];
+                $category = $rowLoad[2];
+                $picture = $rowLoad[3];
             }
             
         } catch (PDOException $th) {
@@ -99,9 +97,7 @@ $stmtCategories->execute();
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Product</th>
-                                                <th>Description</th>
                                                 <th>Category</th>
-                                                <th>Quantity</th>
                                                 <th>Picture</th>
                                                 <th>Actions</th>
 
@@ -111,9 +107,7 @@ $stmtCategories->execute();
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Product</th>
-                                                <th>Description</th>
                                                 <th>Category</th>
-                                                <th>Quantity</th>
                                                 <th>Picture</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -122,7 +116,7 @@ $stmtCategories->execute();
                                             <?php
                                             
                                                 try {
-                                                    $sqlnprod="SELECT productID, pname, descrip, qty, cname, picture, md5(productID) FROM vwproducts";
+                                                    $sqlnprod="SELECT productID, pname, cname, picture, md5(productID) FROM vwproducts";
                                                     $stmtabout=$con->prepare($sqlnprod);
                                                     $stmtabout->execute();
                                                     $strtable="";
@@ -131,18 +125,16 @@ $stmtCategories->execute();
                                                         $strtable.="<td>{$row[0]}</td>";
                                                         $strtable.="<td>{$row[1]}</td>";
                                                         $strtable.="<td>{$row[2]}</td>";
-                                                        $strtable.="<td>{$row[3]}</td>";
-                                                        $strtable.="<td>{$row[4]}</td>";
-                                                        $pic = strlen($row[5]) <= 2 ? 'nopic.jpg' : $row[5];
+                                                        $pic = strlen($row[3]) <= 2 ? 'nopic.jpg' : $row[3];
                                                         $strtable .= "<td><img src='uploads/products/{$pic}' alt='Image' width='100' height='100'></td>";
                                                         
                                                         $strDelButton="<button class='btn btn-danger'>
-                                                                        <a href='saveproduct.php?delid={$row[6]}'>
+                                                                        <a href='saveproduct.php?delid={$row[4]}'>
                                                                         <i class='bx bxs-trash' style='color:#000'></i>
                                                                         </a>
                                                                         </button>";
                                                         $strUpdateButton="<button class='btn btn-warning'>
-                                                                        <a href='products.php?udid={$row[6]}'>
+                                                                        <a href='products.php?udid={$row[4]}'>
                                                                         <i class='bx bxs-edit-alt' style='color:#000'></i>
                                                                         </a>
                                                                         </button>";
@@ -170,9 +162,7 @@ $stmtCategories->execute();
                                             <input type="text" class="form-control" name="txtpname" value ="<?=$pname?>" id="exampleFormControlInput1" placeholder="">
                                             </div>
 
-                                            <div class="row mb-3">
-                                                <div class="col-6">
-                                                    
+                                            <div class=" mb-3">
                                                 <label for="exampleFormControlInput1" class="form-label">Category:</label>
                                                 <select name="txtcategory" class="form-control">
                                                     <option value="">-- Select Category --</option>
@@ -190,16 +180,6 @@ $stmtCategories->execute();
                                                     }
                                                     ?>
                                                 </select>
-                                                </div>
-                                                <div class="col-6">
-                                                <label for="exampleFormControlInput1" class="form-label">Quantity:</label>
-                                                <input type="text" class="form-control" name="txtqty" value ="<?=$qty?>" id="exampleFormControlInput1" placeholder="" required>
-                                                </div>
-                                            </div>
-                                
-                                            <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="txtdesc" rows="5" required><?=$desc?></textarea>
                                             </div>
                                             
                                             <div class="mb-3">

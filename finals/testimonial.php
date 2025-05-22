@@ -1,18 +1,19 @@
 <?php
     require_once("includes/dbconnect.php");
-    $id = 0;
-    $category ="";
+
     if(isset($_GET['udid'])){
         $id = $_GET['udid'];
         try {
-            $sqlLoad = "SELECT categoryID, cname, md5(categoryID) FROM category WHERE md5(categoryID) = ?";
+            $sqlLoad = "SELECT testimonialID, quote, author_name, author_title, picture, md5(testimonialID) FROM testimonials WHERE md5(testimonialID) = ?"  ;
             $dataLoad = array($id);
             $stmtLoad = $con->prepare($sqlLoad);
             $stmtLoad->execute($dataLoad);
             if($stmtLoad->rowCount()!= 0){
                 $rowLoad = $stmtLoad->fetch();
-                $pname = $rowLoad[1];
-                $desc = $rowLoad[2];
+                $quote = $rowLoad[1];
+                $author = $rowLoad[2];
+                $position = $rowLoad[3];
+                $picture = $rowLoad[4];
             }
             
         } catch (PDOException $th) {
@@ -21,7 +22,9 @@
     }
     else {
         $id = 0;
-        $category ="";
+        $quote ="";
+        $author = "";
+        $position = "";
     }
     
 ?>
@@ -48,15 +51,14 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Category</h1>
+                        <h1 class="mt-4">Testimonial</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Category</li>
+                            <li class="breadcrumb-item active">Testimonial</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-                                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+                                This table shows the testimonials
                                     .</br>
                                 <a href="" class="btn btn-primary">Add New Record</a>
                             </div>
@@ -83,36 +85,48 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Category</th>
-                                                <th>Action</th>
+                                                <th>Quote</th>
+                                                <th>Author</th>
+                                                <th>Position</th>
+                                                <th>Picture</th>
+                                                <th>Actions</th>
+
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Category</th>
-                                                <th>Action</th>
+                                                <th>Quote</th>
+                                                <th>Author</th>
+                                                <th>Position</th>
+                                                <th>Picture</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <?php
                                             
                                                 try {
-                                                    $sqlnprod="SELECT categoryID, cname, md5(categoryID) FROM category";
+                                                    $sqlnprod="SELECT testimonialID, quote, author_name, author_title, picture, md5(testimonialID) FROM testimonials";
                                                     $stmtabout=$con->prepare($sqlnprod);
                                                     $stmtabout->execute();
                                                     $strtable="";
                                                     while($row= $stmtabout->fetch()){
                                                         $strtable.="<tr>";
                                                         $strtable.="<td>{$row[0]}</td>";
-                                                        $strtable.="<td>{$row[1]}</td>";                                                        
+                                                        $strtable.="<td>{$row[1]}</td>";
+                                                        $strtable.="<td>{$row[2]}</td>";
+                                                        $strtable.="<td>{$row[3]}</td>";
+                                                        $pic = strlen($row[4]) <= 2 ? 'nopic.jpg' : $row[4];
+                                                        $strtable .= "<td><img src='uploads/testimonials/{$pic}' alt='Image' width='100' height='100'></td>";
+                                                        
                                                         $strDelButton="<button class='btn btn-danger'>
-                                                                        <a href='saveproduct.php?delid={$row[2]}'>
+                                                                        <a href='savetestimonial.php?delid={$row[5]}'>
                                                                         <i class='bx bxs-trash' style='color:#000'></i>
                                                                         </a>
                                                                         </button>";
                                                         $strUpdateButton="<button class='btn btn-warning'>
-                                                                        <a href='products.php?udid={$row[2]}'>
+                                                                        <a href='testimonial.php?udid={$row[5]}'>
                                                                         <i class='bx bxs-edit-alt' style='color:#000'></i>
                                                                         </a>
                                                                         </button>";
@@ -133,11 +147,28 @@
                                 <h1>Data Entry:</h1>
                                     <div class="data-entry">
                                     <div class="mb-3">
-                                        <form action="savecategory.php" method="POST" enctype="multipart/form-data">
+                                        <form action="savetestimonial.php" method="POST" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-6 mb-3">
+                                                <input type="hidden" name="txtid" value="<?=$id?>" />
+                                                <label for="exampleFormControlInput1" class="form-label">Author:</label>
+                                                <input type="text" class="form-control" name="txtauthor" value ="<?=$author?>" id="exampleFormControlInput1" placeholder="">
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                <input type="hidden" name="txtid" value="<?=$id?>" />
+                                                <label for="exampleFormControlInput1" class="form-label">Position:</label>
+                                                <input type="text" class="form-control" name="txtposition" value ="<?=$position?>" id="exampleFormControlInput1" placeholder="">
+                                                </div>
+                                            </div>
+
                                             <div class="mb-3">
-                                            <input type="hidden" name="txtid" value="<?=$id?>" />
-                                            <label for="exampleFormControlInput1" class="form-label">Category:</label>
-                                            <input type="text" class="form-control" name="txtcategory" value ="<?=$category?>" id="exampleFormControlInput1" placeholder="">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Quote:</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="txtquote" rows="5" required><?=$quote?></textarea>
+                                            </div>
+                                            
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlInput1" class="form-label">Picture:</label>
+                                                <input type="file" class="form-control" name="picture" accept ="image/*" id="exampleFormControlInput1" >
                                             </div>
                                             <button class="btn btn-primary">Submit</button>
                                         </form>
